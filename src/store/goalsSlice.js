@@ -112,3 +112,11 @@ export const getGoalProgress = (goal) => {
     Math.round((Number(goal.saved) / Number(goal.target)) * 100),
   );
 };
+export const getDaysLeft = (deadline) => {
+  if (!deadline) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const end = new Date(deadline);
+  const diff = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
+  return diff;
+};
