@@ -120,3 +120,14 @@ export const getDaysLeft = (deadline) => {
   const diff = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
   return diff;
 };
+export const getGoalStatus = (goal) => {
+  const progress = getGoalProgress(goal);
+  const daysLeft = getDaysLeft(goal.deadline);
+  if (progress >= 100)
+    return { label: "Completed", color: "text-green-600" };
+  if (daysLeft !== null && daysLeft < 0)
+    return { label: "Overdue", color: "text-red-600" };
+  if (daysLeft !== null && daysLeft <= 14)
+    return { label: `${daysLeft} days left`, color: "text-yellow-600" };
+  return { label: `${daysLeft} days left`, color: "text-gray-500" };
+};
