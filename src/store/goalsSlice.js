@@ -104,3 +104,11 @@ export const {
 } = goalsSlice.actions;
 
 export default goalsSlice.reducer;
+
+export const getGoalProgress = (goal) => {
+  if (!goal.target || Number(goal.target) === 0) return 0;
+  return Math.min(
+    100,
+    Math.round((Number(goal.saved) / Number(goal.target)) * 100),
+  );
+};
