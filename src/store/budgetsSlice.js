@@ -40,3 +40,38 @@ const starterBudgets = [
     color: "#22c55e",
   },
 ];
+const initialState = {
+  list: loadFromStorage() || starterBudgets,
+}
+
+const saveToStorage = (list) => {
+  localStorage.setItem('finance_tracker_budgets', JSON.stringify(list))
+}
+
+const budgetsSlice = createSlice({
+  name: 'budgets',
+  initialState,
+  reducers: {
+    addBudget: (state, action) => {
+      const newBudget = { ...action.payload, id: Date.now() }
+      state.list.push(newBudget)
+      saveToStorage(state.list)
+    },
+    deleteBudget: (state, action) => {
+      state.list = state.list.filter(b => b.id !== action.payload)
+      saveToStorage(state.list)
+    },
+    editBudget: (state, action) => {
+      const index = state.list.findIndex(b => b.id === action.payload.id)
+      if (index !== -1) {
+        state.list[index] = action.payload
+        saveToStorage(state.list)
+      }
+    },
+    clearBudgets: (state) => {
+      state.list = []
+      saveToStorage(state.list)
+    }
+  }
+})
+
