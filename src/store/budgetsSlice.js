@@ -83,3 +83,26 @@ export const selectSpentForCategory = (state, category) => {
     .filter((t) => t.type === "expense" && t.category === category)
     .reduce((sum, t) => sum + Number(t.amount), 0);
 };
+export const getBudgetStatus = (spent, limit) => {
+  const percent = limit > 0 ? (spent / limit) * 100 : 0;
+  if (percent >= 100)
+    return {
+      label: "Over Budget",
+      color: "bg-red-500",
+      textColor: "text-red-600",
+      percent,
+    };
+  if (percent >= 80)
+    return {
+      label: "Warning",
+      color: "bg-yellow-500",
+      textColor: "text-yellow-600",
+      percent,
+    };
+  return {
+    label: "On Track",
+    color: "bg-green-500",
+    textColor: "text-green-600",
+    percent,
+  };
+};
