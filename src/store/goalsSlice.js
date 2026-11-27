@@ -94,3 +94,13 @@ const goalsSlice = createSlice({
     },
   },
 });
+export const {
+  addGoal,
+  deleteGoal,
+  editGoal,
+  addMoneyToGoal,
+  withdrawFromGoal,
+  clearGoals,
+} = goalsSlice.actions;
+
+export default goalsSlice.reducer;
