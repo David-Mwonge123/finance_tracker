@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 //Load from LocalStorage if it exists, else use starter data
 const loadFromStorage = () => {
   try {
-    const saved = localStorage.getItem('fintrack_transactions')
+    const saved = localStorage.getItem('finance_tracker_transactions')
     if (saved) return JSON.parse(saved)
     return null
   } catch {
@@ -31,7 +31,7 @@ const initialState = {
 }
 
 const saveToStorage = (list) => {
-  localStorage.setItem('fintrack_transactions', JSON.stringify(list))
+  localStorage.setItem('finance_tracker_transactions', JSON.stringify(list))
 }
 
 const transactionsSlice = createSlice({

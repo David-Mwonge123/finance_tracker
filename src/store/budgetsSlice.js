@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const loadFromStorage = () => {
   try {
-    const saved = localStorage.getItem('fintrack_budgets')
+    const saved = localStorage.getItem('finance_tracker_budgets')
     if (saved) return JSON.parse(saved)
     return null
   } catch {
